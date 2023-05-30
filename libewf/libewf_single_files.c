@@ -362,6 +362,13 @@ int libewf_single_files_parse_line(
 	static char *function        = "libewf_single_files_parse_line";
 	size_t safe_line_string_size = 0;
 
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
+
 	if( line_string == NULL )
 	{
 		libcerror_error_set(
@@ -427,6 +434,15 @@ int libewf_single_files_parse_line(
 	*line_string      = safe_line_string;
 	*line_string_size = safe_line_string_size;
 
+    /*
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: end:%s\n", function, line_string);
+        }
+#endif
+*/
+
 	return( 1 );
 }
 
@@ -448,6 +464,13 @@ int libewf_single_files_parse_category_number_of_entries(
 	uint64_t value_64bit                  = 0;
 	int number_of_values                  = 0;
 	int safe_line_index                   = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( line_index == NULL )
 	{
@@ -649,6 +672,13 @@ int libewf_single_files_parse_category_types(
 	size_t line_string_size = 0;
 	int safe_line_index     = 0;
 
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
+
 	if( line_index == NULL )
 	{
 		libcerror_error_set(
@@ -720,6 +750,13 @@ int libewf_single_files_parse_number_of_entries(
 	uint64_t value_64bit                  = 0;
 	int number_of_values                  = 0;
 	int safe_line_index                   = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( line_index == NULL )
 	{
@@ -921,6 +958,13 @@ int libewf_single_files_parse_format(
 	int number_of_types     = 0;
 	int value_index         = 0;
 
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
+
 	if( format == NULL )
 	{
 		libcerror_error_set(
@@ -1016,12 +1060,19 @@ int libewf_single_files_parse_rec_category(
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
      size64_t *media_size,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error )
 {
-	uint8_t *line_string    = NULL;
 	static char *function   = "libewf_single_files_parse_rec_category";
-	size_t line_string_size = 0;
 	int safe_line_index     = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( single_files == NULL )
 	{
@@ -1047,6 +1098,8 @@ int libewf_single_files_parse_rec_category(
 	}
 	safe_line_index = *line_index;
 
+    /*
+
 	if( libewf_single_files_parse_line(
 	     lines,
 	     safe_line_index,
@@ -1065,6 +1118,14 @@ int libewf_single_files_parse_rec_category(
 		return( -1 );
 	}
 	safe_line_index += 1;
+    */
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: line_string_size: %d, line_string: %c%c%c\n", function, line_string_size, line_string[0], line_string[1], line_string[2] );
+        }
+#endif
 
 	if( ( line_string_size != 4 )
 	 || ( line_string[ 0 ] != (uint8_t) 'r' )
@@ -1157,6 +1218,13 @@ int libewf_single_files_parse_record_values(
 	int number_of_values                  = 0;
 	int safe_line_index                   = 0;
 	int value_index                       = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( line_index == NULL )
 	{
@@ -1467,19 +1535,26 @@ int libewf_single_files_parse_perm_category(
      libewf_single_files_t *single_files,
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error )
 {
 	libewf_lef_permission_t *lef_permission     = NULL;
 	libewf_permission_group_t *permission_group = NULL;
 	libfvalue_split_utf8_string_t *types        = NULL;
-	uint8_t *line_string                        = NULL;
 	static char *function                       = "libewf_single_files_parse_perm_category";
-	size_t line_string_size                     = 0;
 	int copy_of_number_of_permission_groups     = 0;
 	int entry_index                             = 0;
 	int number_of_permission_groups             = 0;
 	int permission_group_index                  = 0;
 	int safe_line_index                         = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( single_files == NULL )
 	{
@@ -1505,6 +1580,7 @@ int libewf_single_files_parse_perm_category(
 	}
 	safe_line_index = *line_index;
 
+    /*
 	if( libewf_single_files_parse_line(
 	     lines,
 	     safe_line_index,
@@ -1523,6 +1599,7 @@ int libewf_single_files_parse_perm_category(
 		goto on_error;
 	}
 	safe_line_index += 1;
+    */
 
 	if( ( line_string_size != 5 )
 	 || ( line_string[ 0 ] != (uint8_t) 'p' )
@@ -1818,6 +1895,13 @@ int libewf_single_files_parse_permission_group(
 	int permission_index                    = 0;
 	int safe_line_index                     = 0;
 
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
+
 	if( single_files == NULL )
 	{
 		libcerror_error_set(
@@ -2053,13 +2137,13 @@ int libewf_single_files_parse_srce_category(
      libewf_single_files_t *single_files,
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error )
 {
 	libewf_lef_source_t *lef_source      = NULL;
 	libfvalue_split_utf8_string_t *types = NULL;
-	uint8_t *line_string                 = NULL;
 	static char *function                = "libewf_single_files_parse_srce_category";
-	size_t line_string_size              = 0;
 	int copy_of_number_of_sources        = 0;
 	int entry_index                      = 0;
 	int number_of_entries                = 0;
@@ -2067,6 +2151,13 @@ int libewf_single_files_parse_srce_category(
 	int safe_line_index                  = 0;
 	int source_identifier                = 0;
 	int source_index                     = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( single_files == NULL )
 	{
@@ -2092,6 +2183,7 @@ int libewf_single_files_parse_srce_category(
 	}
 	safe_line_index = *line_index;
 
+    /*
 	if( libewf_single_files_parse_line(
 	     lines,
 	     safe_line_index,
@@ -2110,6 +2202,7 @@ int libewf_single_files_parse_srce_category(
 		goto on_error;
 	}
 	safe_line_index += 1;
+    */
 
 	if( ( line_string_size != 5 )
 	 || ( line_string[ 0 ] != (uint8_t) 's' )
@@ -2455,18 +2548,25 @@ int libewf_single_files_parse_sub_category(
      libewf_single_files_t *single_files,
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error )
 {
 	libewf_lef_subject_t *lef_subject    = NULL;
 	libfvalue_split_utf8_string_t *types = NULL;
-	uint8_t *line_string                 = NULL;
 	static char *function                = "libewf_single_files_parse_sub_category";
-	size_t line_string_size              = 0;
 	int copy_of_number_of_subjects       = 0;
 	int number_of_entries                = 0;
 	int number_of_subjects               = 0;
 	int safe_line_index                  = 0;
 	int subject_index                    = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( single_files == NULL )
 	{
@@ -2492,6 +2592,8 @@ int libewf_single_files_parse_sub_category(
 	}
 	safe_line_index = *line_index;
 
+    /*
+
 	if( libewf_single_files_parse_line(
 	     lines,
 	     safe_line_index,
@@ -2510,6 +2612,8 @@ int libewf_single_files_parse_sub_category(
 		goto on_error;
 	}
 	safe_line_index += 1;
+
+    */
 
 	if( ( line_string_size != 4 )
 	 || ( line_string[ 0 ] != (uint8_t) 's' )
@@ -2823,14 +2927,21 @@ int libewf_single_files_parse_entry_category(
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
      uint8_t *format,
-     libcerror_error_t **error )
+     size_t line_string_size,
+     uint8_t *line_string,
+     libcerror_error_t **error)
 {
 	libfvalue_split_utf8_string_t *types = NULL;
-	uint8_t *line_string                 = NULL;
 	static char *function                = "libewf_single_files_parse_entry_category";
-	size_t line_string_size              = 0;
 	int number_of_sub_entries            = 0;
 	int safe_line_index                  = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( single_files == NULL )
 	{
@@ -2843,6 +2954,13 @@ int libewf_single_files_parse_entry_category(
 
 		return( -1 );
 	}
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: testing single_files->file_entry_tree_root_node\n", function);
+        }
+#endif
 	if( single_files->file_entry_tree_root_node != NULL )
 	{
 		libcerror_error_set(
@@ -2867,6 +2985,15 @@ int libewf_single_files_parse_entry_category(
 	}
 	safe_line_index = *line_index;
 
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: validating\n", function);
+        }
+#endif
+
+    /*
+
 	if( libewf_single_files_parse_line(
 	     lines,
 	     safe_line_index,
@@ -2886,6 +3013,8 @@ int libewf_single_files_parse_entry_category(
 	}
 	safe_line_index += 1;
 
+    */
+
 	if( ( line_string_size != 6 )
 	 || ( line_string[ 0 ] != (uint8_t) 'e' )
 	 || ( line_string[ 1 ] != (uint8_t) 'n' )
@@ -2899,9 +3028,15 @@ int libewf_single_files_parse_entry_category(
 		 LIBCERROR_RUNTIME_ERROR_UNSUPPORTED_VALUE,
 		 "%s: unsupported category header.",
 		 function );
-
 		goto on_error;
 	}
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: parsing\n", function);
+        }
+#endif
 	if( libewf_single_files_parse_category_number_of_entries(
 	     lines,
 	     &safe_line_index,
@@ -3065,6 +3200,13 @@ int libewf_single_files_parse_file_entry(
 	int number_of_sub_entries               = 0;
 	int safe_line_index                     = 0;
 	int sub_entry_index                     = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( parent_file_entry_node == NULL )
 	{
@@ -3292,6 +3434,13 @@ int libewf_single_files_parse_file_entry_number_of_sub_entries(
 	uint64_t value_64bit                  = 0;
 	int number_of_values                  = 0;
 	int safe_line_index                   = 0;
+
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
 
 	if( line_index == NULL )
 	{
@@ -3538,6 +3687,13 @@ int libewf_single_files_parse_utf8_string(
 	size_t line_string_size              = 0;
 	int line_index                       = 0;
 
+#if defined( HAVE_DEBUG_OUTPUT )
+		if( libcnotify_verbose != 0 )
+		{
+          libcnotify_printf("%s: start\n", function);
+        }
+#endif
+
 	if( single_files == NULL )
 	{
 		libcerror_error_set(
@@ -3565,6 +3721,7 @@ int libewf_single_files_parse_utf8_string(
 
 		goto on_error;
 	}
+
 	if( libewf_single_files_parse_line(
 	     lines,
 	     line_index,
@@ -3596,82 +3753,167 @@ int libewf_single_files_parse_utf8_string(
 	}
 	line_index += 1;
 
-	if( libewf_single_files_parse_rec_category(
-	     single_files,
-	     lines,
-	     &line_index,
-	     media_size,
-	     error ) != 1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_CONVERSION,
-		 LIBCERROR_CONVERSION_ERROR_GENERIC,
-		 "%s: unable to parse rec category.",
-		 function );
+    for (int j = 0; j < 5; j++) {
+#if defined( HAVE_DEBUG_OUTPUT )
+      if( libcnotify_verbose != 0 ) {
+        libcnotify_printf("%s: parsing categories string\n", function);
+      }
+#endif
 
-		goto on_error;
-	}
-	if( libewf_single_files_parse_perm_category(
-	     single_files,
-	     lines,
-	     &line_index,
-	     error ) != 1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_CONVERSION,
-		 LIBCERROR_CONVERSION_ERROR_GENERIC,
-		 "%s: unable to parse perm category.",
-		 function );
+      if( libewf_single_files_parse_line(
+           lines,
+           line_index,
+           &line_string,
+           &line_string_size,
+           error ) != 1 )
+      {
+          libcerror_error_set(
+           error,
+           LIBCERROR_ERROR_DOMAIN_RUNTIME,
+           LIBCERROR_RUNTIME_ERROR_GET_FAILED,
+           "%s: unable to retrieve line[%d] string: %d.",
+           function,
+           j + 1,
+           line_index );
 
-		goto on_error;
-	}
-	if( libewf_single_files_parse_srce_category(
-	     single_files,
-	     lines,
-	     &line_index,
-	     error ) != 1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_CONVERSION,
-		 LIBCERROR_CONVERSION_ERROR_GENERIC,
-		 "%s: unable to parse srce category.",
-		 function );
+          goto on_error;
+      }
+      line_index += 1;
+#if defined( HAVE_DEBUG_OUTPUT )
+      if( libcnotify_verbose != 0 ) {
+        libcnotify_printf("%s: line_string_size:%d\n", function, line_string_size);
+        for (int k = 0; k<line_string_size-1; k++) {
+          libcnotify_printf("%s: category[%d]:%c\n", function, k, line_string[k]);
+        }
+      }
+#endif
 
-		goto on_error;
-	}
-	if( libewf_single_files_parse_sub_category(
-	     single_files,
-	     lines,
-	     &line_index,
-	     error ) != 1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_CONVERSION,
-		 LIBCERROR_CONVERSION_ERROR_GENERIC,
-		 "%s: unable to parse sub category.",
-		 function );
+      if (( line_string_size == 4 ) &&
+          ( line_string[ 0 ] == (uint8_t) 'r' ) &&
+          ( line_string[ 1 ] == (uint8_t) 'e' ) &&
+          ( line_string[ 2 ] == (uint8_t) 'c' ) ) {
+        if( libewf_single_files_parse_rec_category(
+             single_files,
+             lines,
+             &line_index,
+             media_size,
+             line_string_size,
+             line_string,
+             error ) != 1 )
+        {
+            libcerror_error_set(
+             error,
+             LIBCERROR_ERROR_DOMAIN_CONVERSION,
+             LIBCERROR_CONVERSION_ERROR_GENERIC,
+             "%s: unable to parse rec category.",
+             function );
 
-		goto on_error;
-	}
-	if( libewf_single_files_parse_entry_category(
-	     single_files,
-	     lines,
-	     &line_index,
-	     format,
-	     error ) != 1 )
-	{
-		libcerror_error_set(
-		 error,
-		 LIBCERROR_ERROR_DOMAIN_CONVERSION,
-		 LIBCERROR_CONVERSION_ERROR_GENERIC,
-		 "%s: unable to parse entry category.",
-		 function );
+            goto on_error;
+        }
+      }
+      else if( ( line_string_size == 5 )
+       && ( line_string[ 0 ] == (uint8_t) 'p' )
+       && ( line_string[ 1 ] == (uint8_t) 'e' )
+       && ( line_string[ 2 ] == (uint8_t) 'r' )
+       && ( line_string[ 3 ] == (uint8_t) 'm' ) ) {
+        if( libewf_single_files_parse_perm_category(
+             single_files,
+             lines,
+             &line_index,
+             line_string_size,
+             line_string,
+             error ) != 1 )
+        {
+            libcerror_error_set(
+             error,
+             LIBCERROR_ERROR_DOMAIN_CONVERSION,
+             LIBCERROR_CONVERSION_ERROR_GENERIC,
+             "%s: unable to parse perm category.",
+             function );
+            goto on_error;
+        }
+      }
+      else if( ( line_string_size == 5 )
+       && ( line_string[ 0 ] == (uint8_t) 's' )
+       && ( line_string[ 1 ] == (uint8_t) 'r' )
+       && ( line_string[ 2 ] == (uint8_t) 'c' )
+       && ( line_string[ 3 ] == (uint8_t) 'e' ) ) {
+        if( libewf_single_files_parse_srce_category(
+             single_files,
+             lines,
+             &line_index,
+             line_string_size,
+             line_string,
+             error ) != 1 )
+        {
+            libcerror_error_set(
+             error,
+             LIBCERROR_ERROR_DOMAIN_CONVERSION,
+             LIBCERROR_CONVERSION_ERROR_GENERIC,
+             "%s: unable to parse srce category.",
+             function );
 
-		goto on_error;
+            goto on_error;
+        }
+      }
+      else if( ( line_string_size == 4 )
+       && ( line_string[ 0 ] == (uint8_t) 's' )
+       && ( line_string[ 1 ] == (uint8_t) 'u' )
+       && ( line_string[ 2 ] == (uint8_t) 'b' ) ) {
+        if( libewf_single_files_parse_sub_category(
+             single_files,
+             lines,
+             &line_index,
+             line_string_size,
+             line_string,
+             error ) != 1 )
+        {
+            libcerror_error_set(
+             error,
+             LIBCERROR_ERROR_DOMAIN_CONVERSION,
+             LIBCERROR_CONVERSION_ERROR_GENERIC,
+             "%s: unable to parse sub category.",
+             function );
+
+            goto on_error;
+        }
+      }
+      else if( ( line_string_size == 6 )
+       && ( line_string[ 0 ] == (uint8_t) 'e' )
+       && ( line_string[ 1 ] == (uint8_t) 'n' )
+       && ( line_string[ 2 ] == (uint8_t) 't' )
+       && ( line_string[ 3 ] == (uint8_t) 'r' )
+       && ( line_string[ 4 ] == (uint8_t) 'y' ) ) {
+        if( libewf_single_files_parse_entry_category(
+             single_files,
+             lines,
+             &line_index,
+             format,
+             line_string_size,
+             line_string,
+             error
+             ) != 1 )
+        {
+            libcerror_error_set(
+             error,
+             LIBCERROR_ERROR_DOMAIN_CONVERSION,
+             LIBCERROR_CONVERSION_ERROR_GENERIC,
+             "%s: unable to parse entry category.",
+             function );
+
+            goto on_error;
+        }
+      }
+      else {
+          libcerror_error_set(
+           error,
+           LIBCERROR_ERROR_DOMAIN_CONVERSION,
+           LIBCERROR_CONVERSION_ERROR_GENERIC,
+           "%s: unable to parse unknown category",
+           function );
+
+          goto on_error;
+      }
 	}
 	if( libfvalue_split_utf8_string_free(
 	     &lines,

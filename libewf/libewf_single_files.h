@@ -103,6 +103,8 @@ int libewf_single_files_parse_rec_category(
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
      size64_t *media_size,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error );
 
 int libewf_single_files_parse_record_values(
@@ -115,6 +117,8 @@ int libewf_single_files_parse_perm_category(
      libewf_single_files_t *single_files,
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error );
 
 int libewf_single_files_parse_permission_group(
@@ -129,12 +133,16 @@ int libewf_single_files_parse_srce_category(
      libewf_single_files_t *single_files,
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error );
 
 int libewf_single_files_parse_sub_category(
      libewf_single_files_t *single_files,
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error );
 
 int libewf_single_files_parse_entry_category(
@@ -142,6 +150,8 @@ int libewf_single_files_parse_entry_category(
      libfvalue_split_utf8_string_t *lines,
      int *line_index,
      uint8_t *format,
+     size_t line_string_size,
+     uint8_t *line_string,
      libcerror_error_t **error );
 
 int libewf_single_files_parse_file_entry(
